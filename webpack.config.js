@@ -49,6 +49,11 @@ const plugins = () =>
             template: path.resolve(__dirname,'sandbox/debug.html'),
             path: path.resolve(__dirname, 'dist/sandbox'),
             filename: `sandbox/debug.html`
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname,'sandbox/prototype.html'),
+            path: path.resolve(__dirname, 'dist/sandbox'),
+            filename: `sandbox/prototype.html`
         }))
     }
     return basePlugins;
