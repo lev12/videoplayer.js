@@ -10,14 +10,40 @@
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nisi modi dicta praesentium in sequi porro id, facilis, velit molestiae soluta minima quo eveniet? Mollitia, quidem. Soluta eos eligendi facilis!</p>
     
     <div class="videoplayer-container">
-        <video class="videoplayer" id="video1" src="http://content.videoplayer.ru/pd/1/video.mp4" controls></video>
+        <video class="videoplayer" id="video1" src="http://content.videoplayer.ru/pd/1/video.mp4" autoplay="autoplay"></video>
         <div class="vp-controls">
-            <button class="vp-pause"></button>
             <div class="vp-timeline">
-                <div class="vp-progerss-paly"></div>
-                <div class="vp-progerss-buffer"></div>
-                <div class="vp-progerss-mouse"></div>
+                <div class="vp-progress-buffer"></div>
+                <div class="vp-progress-play">
+                    <span class="vp-icon-placeholder"></span>
+                </div>
+                <div class="vp-progress-mouse"></div>
             </div>
+            <div class="vp-control-container">
+                <button class="vp-button">
+                    <span class="vp-icon-placeholder vp-icon-pause"></span>
+                </button>
+                <button class="vp-button">
+                    <span class="vp-icon-placeholder vp-icon-volume-high"></span>
+                </button>
+                <div class="vp-time">
+                    <span class="vp-remaining-time-display">0:10</span>
+                    <span> / </span>
+                    <span class="vp-duration-display">3:12</span>
+                </div>
+                <div class="vp-control-space"></div>
+                <button class="vp-button">
+                    <span class="vp-icon-placeholder vp-icon-settings"></span>
+                </button>
+                <button class="vp-button">
+                    <span class="vp-icon-placeholder vp-icon-picture-in-picture"></span>
+                </button>
+                <button class="vp-button">
+                    <span class="vp-icon-placeholder vp-icon-fullscreen"></span>
+                </button>
+            </div>
+
+
         </div>
     </div>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nisi modi dicta praesentium in sequi porro id, facilis, velit molestiae soluta minima quo eveniet? Mollitia, quidem. Soluta eos eligendi facilis!</p>
