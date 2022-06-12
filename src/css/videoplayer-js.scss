@@ -7,12 +7,125 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+$control-bottom-height: 60px;
+$text-color: #F4F4F4;
+
+$control-settings-height: 180px;
+$control-settings-width: 250px;
+
+$control-quality-height: 270px;
+$control-quality-width: 250px;
+
 .videoplayer-container
 {
     //video resolution
     width: 1280px;
     height: 720px;
     position: relative;
+
+    hr{
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 5px 0;
+        padding: 0;
+    }
+
+    .vp-icon-pause::before{
+        content: "\f103";
+    }
+
+    .vp-icon-play::before {
+        content: "\f101";
+    }
+
+    .vp-icon-volume-low::before{
+        content: "\f105";
+    }
+
+    .vp-icon-volume-mid::before{
+        content: "\f106";
+    }
+
+    .vp-icon-volume-high::before{
+        content: "\f107";
+    }
+
+    .vp-icon-settings::before{
+        content: "\f110";
+    }
+
+    .vp-icon-picture-in-picture::before{
+        content: "\f121";
+    }
+
+    .vp-icon-fullscreen:before {
+        font-size: 32px;
+        content: "\f108";
+    }
+
+    .vp-icon-audio-track:before {
+        content: "\f11e";
+    }
+
+    .vp-icon-video-track:before {
+        content: "\f10b";
+    }
+
+    .vp-icon-subtitles:before {
+        content: "\f10c";
+    }
+
+    .vp-icon-speed:before {
+        content: "\f113";
+    }
+
+    .vp-icon-quality:before {
+        content: "\f114";
+    }
+
+    .vp-icon-back:before {
+        content: "<";
+    }
+
+    .vp-icon-check:before {
+        content: "✓";
+    }
+    
+
+    .vp-button{
+        background: none;
+        border: none;
+        color: inherit;
+        display: inline-block;
+        font-size: inherit;
+        line-height: inherit;
+        text-transform: none;
+        text-decoration: none;
+        transition: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        padding: 0px;
+        margin-right: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        &:last-child{
+            margin-right: 0px;
+        }
+    }
+
+    .vp-icon-placeholder{
+        font-family: VideoJS;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 25px;
+        text-align: center;
+        color: $text-color;
+        vertical-align: middle;
+    }
 
     .videoplayer{
         position: absolute;
@@ -35,7 +148,7 @@
         rgba(0, 0, 0, 0.3) 41.15%);
 
 
-        height: 60px;
+        height: $control-bottom-height;
     }
 
     .vp-timeline{
@@ -79,9 +192,7 @@
         }
     }
 
-    
-
-    .vp-control-container{
+    .vp-control-bottom-container{
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 1.5%;
@@ -94,67 +205,68 @@
             float: left;
         }
 
-        .vp-button{
-            background: none;
-            border: none;
-            color: inherit;
-            display: inline-block;
-            font-size: inherit;
-            line-height: inherit;
-            text-transform: none;
-            text-decoration: none;
-            transition: none;
+        .vp-volume-container
+        {
+            display: inherit;
+            .vp-volume-margin{
+                margin-right: 10px;
+            }
+    
+            .vp-volume
+            {
+    
+                background-color: #8C8C8C;
+                width: 50px;
+                margin: 0;
+                padding: 0;
+                margin-bottom: auto;
+                margin-top: auto;
+                margin-right: 20px;
+                .vp-volume-value{
+                    width: 50%;
+                    display: block;
+                    height: 2px;
+    
+                    background-color: $text-color;
+    
+                    
+                    position: relative;
+                    
+                    &::before{
+                        font-family: VideoJS;
+                        font-weight: normal;
+                        font-style: normal;
+                        content: "\f111";
+                        color: $text-color;
+                        font-size: 0.9em;
+                        position: absolute;
+                        right: -0.5em;
+                        top: -0.4em;
+                    }
+                }
+            }
+        }
+        
+        .vp-volume-slider {
             -webkit-appearance: none;
-            -moz-appearance: none;
             appearance: none;
-            padding: 0px;
-            margin-right: 20px;
-        }
-    
-        .vp-icon-placeholder{
-            font-family: VideoJS;
-            font-weight: normal;
-            font-style: normal;
-            font-size: 25px;
-            text-align: center;
-            color: #F4F4F4;
-        }
+            width: 50px;
+            height: 2px;
+            background-color: #8C8C8C;
+            color: $text-color;
 
-        .vp-icon-pause::before{
-            content: "\f103";
-        }
-    
-        .vp-icon-play::before {
-            content: "\f101";
-        }
-    
-        .vp-icon-volume-low::before{
-            content: "\f105";
-        }
-    
-        .vp-icon-volume-mid::before{
-            content: "\f106";
-        }
-    
-        .vp-icon-volume-high::before{
-            content: "\f107";
-        }
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
 
-        .vp-icon-settings::before{
-            content: "\f110";
-        }
-
-        .vp-icon-picture-in-picture::before{
-            content: "\f121";
-        }
-
-        .vp-icon-fullscreen:before {
-            font-size: 32px;
-            content: "\f108";
+            &:hover {
+                opacity: 1; /* Fully shown on mouse-over */
+            }
         }
     
         .vp-time{
-            color: #F4F4F4;
+            color: $text-color;
             margin-right: 20px;
             margin-top: auto;
             margin-bottom: auto;
@@ -169,5 +281,94 @@
             flex: auto;
         }
 
+    }
+
+    .vp-control-list{
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+    }
+
+    .vp-control-item{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: 0px;
+        height: 26px;
+        display: flex;
+
+        &:hover {
+            background-color:rgba(0, 0, 0, 0.37);
+            border-radius: 5px;
+        }
+    }
+
+    .vp-button-list-item{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 0px;
+    }
+
+    .vp-control-settings-container{
+        display: block;
+        position: absolute;
+        right: 1%;
+        bottom: $control-bottom-height;
+        height: $control-settings-height;
+        width: $control-settings-width;
+        border-radius: 5px;
+        padding: 5px;
+
+        background-color: rgba(0, 0, 0, 0.37);
+        color: $text-color;
+
+        
+    }
+
+    .vp-control-quality-container{
+        display: block;
+        position: absolute;
+        right: 1%;
+        bottom: $control-bottom-height;
+        
+        height: $control-quality-height;
+        height: 200px;
+        width: $control-quality-width;
+        border-radius: 5px;
+        padding: 5px;
+
+        background-color: rgba(0, 0, 0, 0.37);
+        color: $text-color;
+
+
+        
+    }
+
+    .vp-control-scroll{
+        overflow: auto;
+    }
+
+    ::-webkit-scrollbar {
+        width: 24px; /* ширина для вертикального скролла */
+        height: 8px; /* высота для горизонтального скролла */
+        background-color: #0000004d;
+    }
+    
+    /* ползунок скроллбара */
+    ::-webkit-scrollbar-thumb {
+        background-color: #303030b8;
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #979797b8;
     }
 }
