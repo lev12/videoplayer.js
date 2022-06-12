@@ -56,7 +56,8 @@ const plugins = () =>
 
 module.exports = {
     mode: 'development',
-    entry: './src/js/index.js',
+    entry: './src/js/index.ts',
+    devtool: 'inline-source-map',
     output: {
         filename: `${filename('videoplayer.bundle','js')}`,
         path: path.resolve(__dirname, 'dist'),
@@ -92,7 +93,15 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
 }
