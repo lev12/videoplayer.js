@@ -130,6 +130,69 @@
                 </ul>
             </div>
         </div>
+        <div class="vp-context-menu  vp-control-scroll">
+            <ul class="vp-context-menu-list vp-control-list">
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button ">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">сделать скриншот</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">сделать клип</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">язык плеера</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">статистика</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button vp-context-menu-hotkey">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">горячие клавиши</span>
+                    </button>
+                </li>
+              </ul>
+        </div>
+        <div class="vp-modal-hotkey">
+            <div class="vp-modal-top">
+                <h2 class="vp-modal-top-title">
+                    Горячие клавиши
+                </h2>
+                <button class="vp-button vp-modal-button-close">
+                    <span class="vp-icon-placeholder vp-icon-close"></span>
+                </button>
+            </div>
+            <ul class="vp-hotkey-list">
+                <li class="vp-hotkey-list-item"><p>Пауза/Плей - "пробел", "K"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перемотать ролик на 10 секунд вперед* - "вправо", "L"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перемотать ролик на 10 секунд назад* - "влево", "J"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перейти к следующему кадру (когда воспроизведение приостановлено) - ","</p></li>
+                <li class="vp-hotkey-list-item"><p>Перейти к следующему кадру (когда воспроизведение приостановлено) - "."</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить скорость воспроизведения - "<", "SHIFT+,"</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить скорость воспроизведения - ">", "SHIFT+."</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить громкость звука - "вверх"</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить громкость звука - "вниз"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить/Выключить звук - "M"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить или отключить субтитры - "c"</p></li>
+                <li class="vp-hotkey-list-item"><p>Настроить прозрачность текста - "o"</p></li>
+                <li class="vp-hotkey-list-item"><p>Настроить прозрачность окна - "w"</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить размер шрифта - "+"</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить размер шрифта - "-"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить или выключить полноэкранный режим - "f"</p></li>
+                <li class="vp-hotkey-list-item"><p>Выйти из полноэкранного режима - "Esc"</p></li>
+            </ul>
+        </div>
     </div>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nisi modi dicta praesentium in sequi porro id, facilis, velit molestiae soluta minima quo eveniet? Mollitia, quidem. Soluta eos eligendi facilis!</p>
     <script>
@@ -367,6 +430,51 @@
                 VolumeState.children[0].classList.remove('vp-icon-volume-low');
                 VolumeState.children[0].classList.add('vp-icon-volume-high');
             }
+        };
+
+
+        
+        var ContextMenu = document.getElementsByClassName("vp-context-menu")[0];
+        var VideoplayerContainer = document.getElementsByClassName("videoplayer-container")[0];
+        ContextMenu.style.display = "none";
+        var menu = ContextMenu;
+        var ContextMenuItem1 = document.getElementsByClassName('vp-context-menu-hotkey')[0];
+        function showMenu(x, y){
+
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+            ContextMenu.style.display = "";
+
+
+        }
+        function hideMenu(){
+            ContextMenu.style.display = "none";
+        }
+        function onContextMenu(e){
+            e.preventDefault();
+            var VideoplayerContainerCoords = VideoplayerContainer.getBoundingClientRect();
+            showMenu(e.clientX - VideoplayerContainerCoords.x, e.clientY - VideoplayerContainerCoords.y);
+            
+            ContextMenuItem1.addEventListener('mousedown', hotkeyview, false);
+            VideoplayerContainer.addEventListener('mousedown', onMouseDown, false);
+        }
+        function onMouseDown(e){
+            
+            hideMenu();
+            VideoplayerContainer.removeEventListener('mousedown', onMouseDown);
+        }
+        VideoplayerContainer.addEventListener('contextmenu', onContextMenu, false);
+
+        
+        var hotkey = document.getElementsByClassName('vp-modal-hotkey')[0];
+        hotkey.style.display = "none";
+        function hotkeyview(){
+            hotkey.style.display = "";
+        };
+
+        var hotkeybuttonclose = document.getElementsByClassName('vp-modal-button-close')[0];
+        hotkeybuttonclose.onclick = function(){
+            hotkey.style.display = "none";
         };
     </script>
 </body>

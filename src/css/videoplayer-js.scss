@@ -93,6 +93,9 @@ $control-quality-width: 250px;
         content: "✓";
     }
     
+    .vp-icon-close:before {
+        content: "☓";
+    }
 
     .vp-button{
         background: none;
@@ -292,12 +295,9 @@ $control-quality-width: 250px;
     }
 
     .vp-control-item{
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 0px;
         margin: 0px;
-        height: 26px;
+        height: 36px;
         display: flex;
 
         &:hover {
@@ -307,6 +307,10 @@ $control-quality-width: 250px;
     }
 
     .vp-button-list-item{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -314,7 +318,8 @@ $control-quality-width: 250px;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        margin: 0px;
+        height: 100%;
+        //margin: 0px;
     }
 
     .vp-control-settings-container{
@@ -352,6 +357,59 @@ $control-quality-width: 250px;
         
     }
 
+    .vp-context-menu{
+        display: block;
+        position: absolute;
+        z-index: 100;
+        border-radius: 5px;
+        padding: 5px;
+        height: 180px;
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.37);
+        color: $text-color;
+        .vp-context-menu-list
+        {
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .context-menu-item-button{
+
+        }
+    }
+
+
+
+    .vp-modal-top{
+        display: flex;
+        height: min-content;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+        .vp-modal-top-title{
+            color: $text-color;
+            margin: 0px;
+        }
+        .vp-modal-button-close{
+            margin-bottom: 0px;
+        }
+    }
+
+    .vp-modal-hotkey{
+        display: flex;
+        flex-direction: column;
+        background-color: #0000004d;
+        position: absolute;
+        height: 60%;
+        width: 80%;
+        top: 20%;
+        right: 10%;
+    }
+
     .vp-control-scroll{
         overflow: auto;
     }
@@ -370,5 +428,17 @@ $control-quality-width: 250px;
     
     ::-webkit-scrollbar-thumb:hover {
         background-color: #979797b8;
+    }
+
+    .vp-hotkey-list{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        color: $text-color;
+
+        .vp-hotkey-list-item > p{
+            padding: 0;
+            margin: 2px;
+        }
     }
 }
