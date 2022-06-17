@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Прототип" videoplayer.js сервер для разработки</title>
+</head>
+<body>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nisi modi dicta praesentium in sequi porro id, facilis, velit molestiae soluta minima quo eveniet? Mollitia, quidem. Soluta eos eligendi facilis!</p>
+    
+    <div class="videoplayer-container">
+        <video class="videoplayer" id="video1" src="http://content.videoplayer.ru/pd/1/video.mp4" autoplay="autoplay" loop></video>
+        <div class="vp-controls">
+            <div class="vp-timeline">
+                <div class="vp-progress-buffer"></div>
+                <div class="vp-progress-play">
+                    <span class="vp-icon-placeholder"></span>
+                </div>
+                <div class="vp-progress-mouse"></div>
+            </div>
+            <div class="vp-control-bottom-container">
+                <button class="vp-button vp-pause">
+                    <span class="vp-icon-placeholder vp-icon-pause"></span>
+                </button>
+                <div class="vp-volume-container">
+                    <button class="vp-button vp-button-volume vp-volume-margin">
+                        <span class="vp-icon-placeholder vp-icon-volume-high"></span>
+                    </button>
+                    <div class="vp-volume">
+                        <span class="vp-volume-value"></span>
+                    </div>
+                </div>
+
+                <div class="vp-time">
+                    <span class="vp-remaining-time-display">0:10</span>
+                    <span> / </span>
+                    <span class="vp-duration-display">3:12</span>
+                </div>
+                <div class="vp-control-space"></div>
+                <button class="vp-button vp-button-settings">
+                    <span class="vp-icon-placeholder vp-icon-settings"></span>
+                </button>
+                <button class="vp-button vp-picture-in-picture">
+                    <span class="vp-icon-placeholder vp-icon-picture-in-picture"></span>
+                </button>
+                <button class="vp-button vp-fullscreen">
+                    <span class="vp-icon-placeholder vp-icon-fullscreen"></span>
+                </button>
+            </div>
+            <div class="vp-control-settings-container">
+                <ul class="vp-control-list vp-control-settings-list">
+                    <li class="vp-control-item vp-control-settings-item">
+                        <button class="vp-button vp-button-list-item vp-button-settings vp-button-audio-track">
+                            <span class="vp-icon-placeholder vp-icon-audio-track"></span>
+                            <span class="vp-control-item-text">Основная</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item vp-control-settings-item">
+                        <button class="vp-button vp-button-list-item vp-button-settings vp-button-video-track">
+                            <span class="vp-icon-placeholder vp-icon-video-track"></span>
+                            <span class="vp-control-item-text">Основная</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item vp-control-settings-item">
+                        <button class="vp-button vp-button-list-item vp-button-settings vp-button-subtitles">
+                            <span class="vp-icon-placeholder vp-icon-subtitles"></span>
+                            <span class="vp-control-item-text">Выключены</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item vp-control-settings-item">
+                        <button class="vp-button vp-button-list-item vp-button-settings vp-button-speed">
+                            <span class="vp-icon-placeholder vp-icon-speed"></span>
+                            <span class="vp-control-item-text">Нормальная</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item vp-control-settings-item vp-button-quality">
+                        <button class="vp-button vp-button-list-item vp-button-settings">
+                            <span class="vp-icon-placeholder vp-icon-quality"></span>
+                            <span class="vp-control-item-text vp-text-quality">1080p</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="vp-control-quality-container vp-control-scroll">
+                <ul class="vp-control-list">
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-back">
+                            <span class="vp-icon-placeholder vp-icon-back"></span>
+                            <span class="vp-control-item-text">Качество </span>
+                        </button>
+                    </li>
+                    <hr>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-1080p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">1080p</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-720p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">720p</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-480p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">480p</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-360p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">360p</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-240p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">240p</span>
+                        </button>
+                    </li>
+                    <li class="vp-control-item">
+                        <button class="vp-button vp-button-list-item vp-button-quality-144p">
+                            <span class="vp-icon-placeholder"></span>
+                            <span class="vp-control-item-text">144p</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="vp-context-menu  vp-control-scroll">
+            <ul class="vp-context-menu-list vp-control-list">
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button ">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">сделать скриншот</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">сделать клип</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">язык плеера</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">статистика</span>
+                    </button>
+                </li>
+                <li class="vp-context-menu-item vp-control-item">
+                    <button class="vp-button vp-button-list-item vp-context-menu-item-button vp-context-menu-hotkey">
+                        <span class="vp-icon-placeholder"></span>
+                        <span class="vp-control-item-text">горячие клавиши</span>
+                    </button>
+                </li>
+              </ul>
+        </div>
+        <div class="vp-modal-hotkey">
+            <div class="vp-modal-top">
+                <h2 class="vp-modal-top-title">
+                    Горячие клавиши
+                </h2>
+                <button class="vp-button vp-modal-button-close">
+                    <span class="vp-icon-placeholder vp-icon-close"></span>
+                </button>
+            </div>
+            <ul class="vp-hotkey-list">
+                <li class="vp-hotkey-list-item"><p>Пауза/Плей - "пробел", "K"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перемотать ролик на 10 секунд вперед* - "вправо", "L"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перемотать ролик на 10 секунд назад* - "влево", "J"</p></li>
+                <li class="vp-hotkey-list-item"><p>Перейти к следующему кадру (когда воспроизведение приостановлено) - ","</p></li>
+                <li class="vp-hotkey-list-item"><p>Перейти к следующему кадру (когда воспроизведение приостановлено) - "."</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить скорость воспроизведения - "<", "SHIFT+,"</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить скорость воспроизведения - ">", "SHIFT+."</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить громкость звука - "вверх"</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить громкость звука - "вниз"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить/Выключить звук - "M"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить или отключить субтитры - "c"</p></li>
+                <li class="vp-hotkey-list-item"><p>Настроить прозрачность текста - "o"</p></li>
+                <li class="vp-hotkey-list-item"><p>Настроить прозрачность окна - "w"</p></li>
+                <li class="vp-hotkey-list-item"><p>Увеличить размер шрифта - "+"</p></li>
+                <li class="vp-hotkey-list-item"><p>Уменьшить размер шрифта - "-"</p></li>
+                <li class="vp-hotkey-list-item"><p>Включить или выключить полноэкранный режим - "f"</p></li>
+                <li class="vp-hotkey-list-item"><p>Выйти из полноэкранного режима - "Esc"</p></li>
+            </ul>
+        </div>
+    </div>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nisi modi dicta praesentium in sequi porro id, facilis, velit molestiae soluta minima quo eveniet? Mollitia, quidem. Soluta eos eligendi facilis!</p>
+    <script>
+        var isViewSettingsContainerControl = false;
+
+        var isViewSettingsControl = false;
+        var ButtonSettings = document.getElementsByClassName("vp-button-settings")[0];
+        var ControlsSettings = document.getElementsByClassName("vp-control-settings-container")[0];
+        ControlsSettings.style.display = "none";
+
+        var isViewQualityControl = false;
+        var ButtonQuality = document.getElementsByClassName("vp-button-quality")[0];
+        var ButtonQualityText = document.getElementsByClassName("vp-text-quality")[0];
+        var ControlsButtonQuality = document.getElementsByClassName("vp-control-quality-container")[0];
+        var ControlsButtonQualityBack = document.getElementsByClassName("vp-button-quality-back")[0];
+        ControlsButtonQuality.style.display = "none";
+
+        ButtonSettings.onclick = function(){
+            isViewSettingsContainerControl = !isViewSettingsContainerControl;
+            if (isViewSettingsContainerControl)
+            {
+                ControlsSettings.style.display = "block";
+                ControlsButtonQuality.style.display = "none";
+                isViewSettingsControl = true;
+                isViewQualityControl = false;
+            }
+            else
+            {
+                ControlsSettings.style.display = "none";
+                ControlsButtonQuality.style.display = "none";
+                isViewQualityControl = false;
+            }
+        };
+
+        ButtonQuality.onclick = function(){
+            isViewQualityControl = !isViewQualityControl;
+            if (isViewQualityControl)
+            {
+                ControlsButtonQuality.style.display = "block";
+                ControlsSettings.style.display = "none";
+                isViewSettingsControl = false;
+            }
+            else
+            {
+                ControlsButtonQuality.style.display = "none";
+            }
+        };
+        
+        ControlsButtonQualityBack.onclick = function(){
+            ControlsSettings.style.display = "block";
+            isViewQualityControl = false;
+            ControlsButtonQuality.style.display = "none";
+            isViewSettingsControl = true;
+        };
+
+        var isViewCheckQuality144p = false;
+        var isViewCheckQuality240p = false;
+        var isViewCheckQuality360p = false;
+        var isViewCheckQuality480p = false;
+        var isViewCheckQuality720p = false;
+        var isViewCheckQuality1080p = false;
+
+        var ButtonQuality144p = document.getElementsByClassName("vp-button-quality-144p")[0];
+        var ButtonQuality240p = document.getElementsByClassName("vp-button-quality-240p")[0];
+        var ButtonQuality360p = document.getElementsByClassName("vp-button-quality-360p")[0];
+        var ButtonQuality480p = document.getElementsByClassName("vp-button-quality-480p")[0];
+        var ButtonQuality720p = document.getElementsByClassName("vp-button-quality-720p")[0];
+        var ButtonQuality1080p = document.getElementsByClassName("vp-button-quality-1080p")[0];
+
+        ButtonQuality1080p.classList.add('vp-icon-check');
+
+        ButtonQuality144p.classList.remove('vp-icon-check');
+        ButtonQuality240p.classList.remove('vp-icon-check');
+        ButtonQuality360p.classList.remove('vp-icon-check');
+        ButtonQuality480p.classList.remove('vp-icon-check');
+        ButtonQuality720p.classList.remove('vp-icon-check');
+        isViewCheckQuality1080p = true;
+
+        isViewCheckQuality144p = false;
+        isViewCheckQuality240p = false;
+        isViewCheckQuality360p = false;
+        isViewCheckQuality480p = false;
+        isViewCheckQuality720p = false;
+
+        ButtonQuality144p.onclick = function(){
+            if (!isViewCheckQuality144p)
+            {
+                ButtonQuality144p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="144p";
+
+                ButtonQuality240p.classList.remove('vp-icon-check');
+                ButtonQuality360p.classList.remove('vp-icon-check');
+                ButtonQuality480p.classList.remove('vp-icon-check');
+                ButtonQuality720p.classList.remove('vp-icon-check');
+                ButtonQuality1080p.classList.remove('vp-icon-check');
+                isViewCheckQuality144p = true;
+                
+                isViewCheckQuality240p = false;
+                isViewCheckQuality360p = false;
+                isViewCheckQuality480p = false;
+                isViewCheckQuality720p = false;
+                isViewCheckQuality1080p = false;
+            }
+        };
+        ButtonQuality240p.onclick = function(){
+            if (!isViewCheckQuality240p)
+            {
+                ButtonQuality240p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="240p";
+
+                ButtonQuality144p.classList.remove('vp-icon-check');
+                ButtonQuality360p.classList.remove('vp-icon-check');
+                ButtonQuality480p.classList.remove('vp-icon-check');
+                ButtonQuality720p.classList.remove('vp-icon-check');
+                ButtonQuality1080p.classList.remove('vp-icon-check');
+                isViewCheckQuality240p = true;
+
+                isViewCheckQuality144p = false;
+                isViewCheckQuality360p = false;
+                isViewCheckQuality480p = false;
+                isViewCheckQuality720p = false;
+                isViewCheckQuality1080p = false;
+            }
+        };
+        ButtonQuality360p.onclick = function(){
+            if (!isViewCheckQuality360p)
+            {
+                ButtonQuality360p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="360p";
+
+                ButtonQuality144p.classList.remove('vp-icon-check');
+                ButtonQuality240p.classList.remove('vp-icon-check');
+                ButtonQuality480p.classList.remove('vp-icon-check');
+                ButtonQuality720p.classList.remove('vp-icon-check');
+                ButtonQuality1080p.classList.remove('vp-icon-check');
+                isViewCheckQuality360p = true;
+
+                isViewCheckQuality144p = false;
+                isViewCheckQuality240p = false;
+                isViewCheckQuality480p = false;
+                isViewCheckQuality720p = false;
+                isViewCheckQuality1080p = false;
+            }
+        };
+        ButtonQuality480p.onclick = function(){
+            if (!isViewCheckQuality480p)
+            {
+                ButtonQuality480p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="480p";
+
+                ButtonQuality144p.classList.remove('vp-icon-check');
+                ButtonQuality240p.classList.remove('vp-icon-check');
+                ButtonQuality360p.classList.remove('vp-icon-check');
+                ButtonQuality720p.classList.remove('vp-icon-check');
+                ButtonQuality1080p.classList.remove('vp-icon-check');
+                isViewCheckQuality480p = true;
+
+                isViewCheckQuality144p = false;
+                isViewCheckQuality240p = false;
+                isViewCheckQuality360p = false;
+                isViewCheckQuality720p = false;
+                isViewCheckQuality1080p = false;
+            }
+        };
+        ButtonQuality720p.onclick = function(){
+            if (!isViewCheckQuality720p)
+            {
+                ButtonQuality720p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="720p";
+
+                ButtonQuality144p.classList.remove('vp-icon-check');
+                ButtonQuality240p.classList.remove('vp-icon-check');
+                ButtonQuality360p.classList.remove('vp-icon-check');
+                ButtonQuality480p.classList.remove('vp-icon-check');
+                ButtonQuality1080p.classList.remove('vp-icon-check');
+                isViewCheckQuality720p = true;
+
+                isViewCheckQuality144p = false;
+                isViewCheckQuality240p = false;
+                isViewCheckQuality360p = false;
+                isViewCheckQuality480p = false;
+                isViewCheckQuality1080p = false;
+            }
+        };
+        ButtonQuality1080p.onclick = function(){
+            if (!isViewCheckQuality1080p)
+            {
+                ButtonQuality1080p.classList.add('vp-icon-check');
+                ButtonQualityText.textContent="1080p";
+
+                ButtonQuality144p.classList.remove('vp-icon-check');
+                ButtonQuality240p.classList.remove('vp-icon-check');
+                ButtonQuality360p.classList.remove('vp-icon-check');
+                ButtonQuality480p.classList.remove('vp-icon-check');
+                ButtonQuality720p.classList.remove('vp-icon-check');
+                isViewCheckQuality1080p = true;
+
+                isViewCheckQuality144p = false;
+                isViewCheckQuality240p = false;
+                isViewCheckQuality360p = false;
+                isViewCheckQuality480p = false;
+                isViewCheckQuality720p = false;
+            }
+        };
+
+        var VolumeContainer = document.getElementsByClassName("vp-volume-container")[0];
+        var VolumeSlider = document.getElementsByClassName("vp-volume")[0];
+        var VolumeState = document.getElementsByClassName("vp-button-volume")[0];
+        
+        var isChangeVolume = false;
+        var isMute = false;
+        VolumeSlider.style.display = "none";
+
+        VolumeContainer.onmouseenter = function(){
+            VolumeSlider.style.display = "inherit";
+        };
+
+        VolumeContainer.onmouseleave = function(){
+            VolumeSlider.style.display = "none";
+        };
+
+        VolumeContainer.onmouseleave = function(){
+            VolumeSlider.style.display = "none";
+        };
+
+        VolumeState.onclick = function(){
+            isMute = !isMute;
+            if (isMute)
+            {
+                VolumeState.children[0].classList.remove('vp-icon-volume-high');
+                VolumeState.children[0].classList.add('vp-icon-volume-low');
+            }
+            else
+            {
+                VolumeState.children[0].classList.remove('vp-icon-volume-low');
+                VolumeState.children[0].classList.add('vp-icon-volume-high');
+            }
+        };
+
+
+        
+        var ContextMenu = document.getElementsByClassName("vp-context-menu")[0];
+        var VideoplayerContainer = document.getElementsByClassName("videoplayer-container")[0];
+        ContextMenu.style.display = "none";
+        var menu = ContextMenu;
+        var ContextMenuItem1 = document.getElementsByClassName('vp-context-menu-hotkey')[0];
+        function showMenu(x, y){
+
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+            ContextMenu.style.display = "";
+
+
+        }
+        function hideMenu(){
+            ContextMenu.style.display = "none";
+        }
+        function onContextMenu(e){
+            e.preventDefault();
+            var VideoplayerContainerCoords = VideoplayerContainer.getBoundingClientRect();
+            showMenu(e.clientX - VideoplayerContainerCoords.x, e.clientY - VideoplayerContainerCoords.y);
+            
+            ContextMenuItem1.addEventListener('mousedown', hotkeyview, false);
+            VideoplayerContainer.addEventListener('mousedown', onMouseDown, false);
+        }
+        function onMouseDown(e){
+            
+            hideMenu();
+            VideoplayerContainer.removeEventListener('mousedown', onMouseDown);
+        }
+        VideoplayerContainer.addEventListener('contextmenu', onContextMenu, false);
+
+        
+        var hotkey = document.getElementsByClassName('vp-modal-hotkey')[0];
+        hotkey.style.display = "none";
+        function hotkeyview(){
+            hotkey.style.display = "";
+        };
+
+        var hotkeybuttonclose = document.getElementsByClassName('vp-modal-button-close')[0];
+        hotkeybuttonclose.onclick = function(){
+            hotkey.style.display = "none";
+        };
+    </script>
+</body>
+</html>
