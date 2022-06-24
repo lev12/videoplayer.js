@@ -48,7 +48,9 @@ const plugins = () =>
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname,'sandbox/debug.html'),
             path: path.resolve(__dirname, 'dist/sandbox'),
-            filename: `sandbox/debug.html`
+            filename: `sandbox/debug.html`,
+            scriptLoading: 'blocking',
+            inject: 'head'
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname,'sandbox/prototype.html'),
@@ -61,12 +63,18 @@ const plugins = () =>
 
 module.exports = {
     mode: 'development',
-    entry: './src/js/index.ts',
+    entry: {
+        videoplayer: './src/js/index.ts'
+    },
     devtool: 'inline-source-map',
     output: {
         filename: `${filename('videoplayer.bundle','js')}`,
         path: path.resolve(__dirname, 'dist'),
-        clean: true
+        clean: true,
+        //library: 'videoplayer',
+        //libraryTarget: 'umd',
+        //libraryExport: 'default',
+        //globalObject: 'this'
     },
     devServer: {
         static: path.resolve(__dirname, 'dist'),
@@ -78,6 +86,7 @@ module.exports = {
     },
     plugins: plugins(),
     module: {
+        strictExportPresence: true,
         rules: [
             {
                 test: /\.html$/,
@@ -100,9 +109,24 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
+                test: /\.ts$/,
                 exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                      presets: ['@babel/preset-typescript']
+                    }
+                }
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: "babel-loader",
+                  options: {
+                    presets: ['@babel/preset-env']
+                  }
+                }
             }
         ]
     },

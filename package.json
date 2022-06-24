@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/lev12/videoplayer.js#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "babel-loader": "^8.2.5",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "html-loader": "^3.1.0",

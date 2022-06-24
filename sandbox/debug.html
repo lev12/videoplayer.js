@@ -11,8 +11,11 @@
 
     </video>
     <script>
-        var videoid = document.getElementById('video1');
-        var player = videoplayer(videoid);
+        let player = new VideoPlayer();
+        let videoid = document.getElementById('video1');
+        player.attachVideo(videoid);
+        player.addSourceData('{"video_group":[{"name": "1", "videoTracks":[{"pd":[{"name": "q","type":"h264","src":"http://content.videoplayer.ru/pd/1/video.mp4"}]}]},{"name": "2", "videoTracks":[{"pd":[{"type":"h264","src":"http://content.videoplayer.ru/pd/2/video.mp4"}]}]}]}');
     </script>
 </body>
 </html>
+
