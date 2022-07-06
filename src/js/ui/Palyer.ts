@@ -1,4 +1,5 @@
 import { ControlBar } from "./ControlBar";
+import { Timeline, TimelineEvent } from "./Timeline";
 
 export class Player {
     private video: HTMLVideoElement;
@@ -12,6 +13,10 @@ export class Player {
         container.append(this.video);
 
         this.controls = this.createControls();
+        this.controls.Timeline.on("change", (e: TimelineEvent) => {
+            this.VideoElement.currentTime = e.TimeSeconds;
+            this.updateTime(e);
+        });
 
         container.append(this.controls.element());
         attachVideo.replaceWith(container);

@@ -203,6 +203,19 @@ $control-quality-width: 250px;
             margin: 0;
             padding: 0;
         }
+
+        .vp-time-marker{
+            position: absolute;
+            display: block;
+            margin: 0;
+            padding: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            bottom: 10px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
     }
 
     .vp-control-bottom-container{

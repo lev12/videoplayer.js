@@ -5,7 +5,6 @@ export class ControlBar implements Component {
     private container: HTMLDivElement;
     private timeline: Timeline;
     constructor () {
-
         this.container = this.createContainer();
         this.timeline = this.createTimeline();
         this.container.append (this.timeline.element());
