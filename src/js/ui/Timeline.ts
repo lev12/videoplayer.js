@@ -170,14 +170,20 @@ export class Timeline extends EventEmitter implements Component {
         let seconds = Math.floor(timeSeconds % 60);
         let minutes = Math.floor(timeSeconds / 60);
         let hours =Math.floor(timeSeconds / 3600);
+
+        let secondsString = seconds.toString();
+        if (Math.floor(seconds / 10) === 0) {
+            secondsString = "0" + seconds.toString();
+        }
+
         if ((minutes === 0) && (hours === 0)){
-            time = "0:" + seconds.toString();
+            time = "0:" + secondsString;
         }
         else if ((hours === 0)) {
-            time = minutes.toString() + ":" + seconds.toString();
+            time = minutes.toString() + ":" + secondsString;
         }
         else {
-            time = hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+            time = hours.toString() + ":" + minutes.toString() + ":" + secondsString;
         }
         return time;
     }

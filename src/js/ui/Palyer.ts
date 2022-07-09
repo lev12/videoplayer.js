@@ -28,7 +28,7 @@ export class Player {
             }
         });
 
-        this.controls.VolumeController.Volume = this.video.volume;
+        
         this.controls.VolumeController.on("change", (e: VolumeControllerEvent) => {
             this.video.volume = e.Volume/100;
             this.video.muted = e.Mute;
@@ -70,6 +70,10 @@ export class Player {
 
     private initVideoMetadata (){
         this.controls.Timeline.Duration = this.video.duration;
+        this.controls.Timeline.CurrentSecond = this.video.currentTime;
+        this.controls.PauseButton.IsPlay = !this.video.paused;
+        this.controls.Time.DurationSeconds = this.video.duration;
+        this.controls.VolumeController.Volume = this.video.volume * 100;
 
         this.video.addEventListener ("timeupdate", this.updateTime.bind(this));
         this.video.addEventListener ("timeupdate", this.updateBuffered.bind(this));
@@ -78,6 +82,7 @@ export class Player {
 
     private updateTime (event: Event): void{
         this.controls.Timeline.CurrentSecond = this.video.currentTime;
+        this.controls.Time.CurrentSeconds = this.video.currentTime;
     }
 
     private updateBuffered (): void{
