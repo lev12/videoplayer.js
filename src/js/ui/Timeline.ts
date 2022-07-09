@@ -36,7 +36,7 @@ export class Timeline extends EventEmitter implements Component {
         this.container.append (this.timeMarker);
     }
 
-    element (){
+    element (): HTMLElement{
         return this.container;
     }
 
@@ -101,9 +101,9 @@ export class Timeline extends EventEmitter implements Component {
         if (this.currentBuffered instanceof TimeRanges)
         {
             for (let i = 0; i < this.currentBuffered.length; i++){
-                let width = ((this.currentBuffered.end(i) - this.currentBuffered.start(i)) / this.duration) * 100;
+                let width = Math.ceil(((this.currentBuffered.end(i) - this.currentBuffered.start(i)) / this.duration) * 100);
                 let widthCSS = width + "%";
-                let left =  (this.currentBuffered.start(i) / this.duration) * 100;
+                let left = Math.floor((this.currentBuffered.start(i) / this.duration) * 100);
                 let leftCSS = left + "%";
                 if (i < this.bufferedLineArray.length){
                     this.bufferedLineArray[i].style.width = widthCSS;
@@ -137,22 +137,28 @@ export class Timeline extends EventEmitter implements Component {
         });
         let fun = (e: MouseEvent) =>
         { 
+            e.preventDefault();
             this.CurrentSecond = (((e.clientX - this.container.getBoundingClientRect().left) / this.container.clientWidth) * this.duration);;
             this.emit("change", new TimelineEvent(this.CurrentSecond,"change"));
         };
         this.container.addEventListener("mousedown", (e: MouseEvent) =>
         { 
+            e.preventDefault();
             fun(e);
             this.container.addEventListener("mousemove", fun);
         });
         this.container.addEventListener("mouseup", (e: MouseEvent) =>
         {
+            e.preventDefault();
             this.container.removeEventListener("mousemove", fun);
         });
         this.container.addEventListener("mouseleave", (e: MouseEvent) =>
         {
+            e.preventDefault();
             this.container.removeEventListener("mousemove", fun);
         });
+        
+
     }
 
     private hideTimeMarker(): void{

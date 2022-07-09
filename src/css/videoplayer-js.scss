@@ -118,17 +118,32 @@ $control-quality-width: 250px;
         &:last-child{
             margin-right: 0px;
         }
+
+        .vp-button-text{
+            font-family: 'Roboto';
+        }
+
+        .vp-icon-placeholder{
+            font-family: VideoJS;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 25px;
+            text-align: center;
+            color: $text-color;
+            vertical-align: middle;
+        }
+
+        .vp-button-icon{
+            font-family: VideoJS;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 25px;
+            text-align: center;
+            color: $text-color;
+            vertical-align: middle;
+        }   
     }
 
-    .vp-icon-placeholder{
-        font-family: VideoJS;
-        font-weight: normal;
-        font-style: normal;
-        font-size: 25px;
-        text-align: center;
-        color: $text-color;
-        vertical-align: middle;
-    }
 
     .videoplayer{
         position: absolute;

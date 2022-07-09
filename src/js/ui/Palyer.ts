@@ -1,3 +1,4 @@
+import { ButtonEvent } from "./Button";
 import { ControlBar } from "./ControlBar";
 import { Timeline, TimelineEvent } from "./Timeline";
 
@@ -16,6 +17,14 @@ export class Player {
         this.controls.Timeline.on("change", (e: TimelineEvent) => {
             this.VideoElement.currentTime = e.TimeSeconds;
             this.updateTime(e);
+        });
+        this.controls.PauseButton.IsPlay = this.video.paused;
+        this.controls.PauseButton.on("click", (e: ButtonEvent) => {
+            if (this.controls.PauseButton.IsPlay){
+                this.video.pause();
+            } else {
+                this.video.play();
+            }
         });
 
         container.append(this.controls.element());
