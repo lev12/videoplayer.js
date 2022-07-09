@@ -1,6 +1,7 @@
 import { ButtonEvent } from "./Button";
 import { ControlBar } from "./ControlBar";
 import { Timeline, TimelineEvent } from "./Timeline";
+import { VolumeControllerEvent } from "./VolumeController";
 
 export class Player {
     private video: HTMLVideoElement;
@@ -25,6 +26,12 @@ export class Player {
             } else {
                 this.video.play();
             }
+        });
+
+        this.controls.VolumeController.Volume = this.video.volume;
+        this.controls.VolumeController.on("change", (e: VolumeControllerEvent) => {
+            this.video.volume = e.Volume/100;
+            this.video.muted = e.Mute;
         });
 
         container.append(this.controls.element());
@@ -52,7 +59,7 @@ export class Player {
     private createVideo(): HTMLVideoElement {
         let video: HTMLVideoElement = document.createElement('video');
         video.classList.add("videoplayer");
-        video.autoplay = true;
+        //video.autoplay = true;
         return video;
     }
 
