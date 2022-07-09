@@ -1,5 +1,8 @@
 import { Component } from "../type/Component";
+import { FullscreenButton } from "./FullscreenButton";
 import { PauseButton } from "./PauseButton";
+import { PictureInPictureButton } from "./PictureInPictureButton";
+import { SettingsButton } from "./settings/SettingsButton";
 import { TimeLabel } from "./TimeLabel";
 import { Timeline } from "./Timeline";
 import { VolumeController } from "./VolumeController";
@@ -11,15 +14,22 @@ export class ControlBar implements Component {
     private containerBottom: HTMLDivElement;
     private pauseButton: PauseButton;
     private volumeController: VolumeController;
-    private time: TimeLabel;
+    private timeLabel: TimeLabel;
+    private settingsButton: SettingsButton;
+    private pictureInPictureButton: PictureInPictureButton;
+    private fullscreenButtonButton: FullscreenButton;
 
     constructor () {
         this.container = this.createContainer();
         this.timeline = this.createTimeline();
         this.pauseButton = this.createPauseButton();
         this.volumeController = this.createVolume(100);
-        this.time = this.createTime();
-        this.containerBottom = this.createContainerBottom(this.pauseButton, this.volumeController, this.time);
+        this.timeLabel = this.createTime();
+        this.settingsButton = this.createSettingsButton();
+        this.pictureInPictureButton = this.createPictureInPictureButton();
+        this.fullscreenButtonButton = this.createFullscreenButton();
+        this.containerBottom = this.createContainerBottom(  this.pauseButton, this.volumeController, this.timeLabel,
+                                                            this.settingsButton, this.pictureInPictureButton, this.fullscreenButtonButton);
 
         this.container.append (this.timeline.element());
         this.container.append (this.containerBottom);
@@ -41,8 +51,20 @@ export class ControlBar implements Component {
         return this.volumeController;
     }
 
-    public get Time(): TimeLabel {
-        return this.time;
+    public get TimeLabel(): TimeLabel {
+        return this.timeLabel;
+    }
+
+    public get SettingsButton(): SettingsButton {
+        return this.settingsButton;
+    }
+
+    public get PictureInPictureButton(): PictureInPictureButton {
+        return this.pictureInPictureButton;
+    }
+
+    public get FullscreenButton(): FullscreenButton {
+        return this.fullscreenButtonButton;
     }
 
     private createContainer (): HTMLDivElement {
@@ -51,13 +73,22 @@ export class ControlBar implements Component {
         return container;
     }
 
-    private createContainerBottom (pButton: PauseButton, vController: VolumeController, t: TimeLabel): HTMLDivElement {
+    private createContainerBottom ( pButton: PauseButton, vController: VolumeController, t: TimeLabel,
+                                    sButton :SettingsButton, pipButton: PictureInPictureButton, fButton: FullscreenButton): HTMLDivElement {
         let container: HTMLDivElement = document.createElement('div');
         container.classList.add("vp-control-bottom-container");
         
         container.append (pButton.element());
         container.append (vController.element());
         container.append (t.element());
+
+        let delimiter: HTMLDivElement = document.createElement('div');
+        delimiter.classList.add("vp-control-space");
+        container.append (delimiter);
+
+        container.append (sButton.element());
+        container.append (pipButton.element());
+        container.append (fButton.element());
         return container;
     }
 
@@ -79,5 +110,20 @@ export class ControlBar implements Component {
     private createTime (): TimeLabel {
         let time: TimeLabel = new TimeLabel();
         return time;
+    }
+
+    private createSettingsButton (): SettingsButton {
+        let settingsButton: SettingsButton = new SettingsButton();
+        return settingsButton;
+    }
+
+    private createPictureInPictureButton (): PictureInPictureButton {
+        let pictureInPictureButton: PictureInPictureButton = new PictureInPictureButton();
+        return pictureInPictureButton;
+    }
+
+    private createFullscreenButton (): FullscreenButton {
+        let fullscreenButton: FullscreenButton = new FullscreenButton();
+        return fullscreenButton;
     }
 }

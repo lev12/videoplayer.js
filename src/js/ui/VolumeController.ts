@@ -33,7 +33,10 @@ export class VolumeController extends EventEmitter implements Component  {
             this.container.append (this.slider.element());
         });
         this.container.addEventListener("mouseleave", (e: MouseEvent) => {
-            this.container.querySelector(".vp-volume")?.remove();
+            let temp = this.container.querySelector(".vp-volume");
+            if (temp !== null) {
+                temp.remove();
+            }
         });
 
         

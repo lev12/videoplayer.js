@@ -34,6 +34,15 @@ export class Player {
             this.video.muted = e.Mute;
         });
 
+
+        this.controls.PictureInPictureButton.on("click", () => {
+            this.video.requestPictureInPicture();
+        });
+
+        this.controls.FullscreenButton.on("click", () => {
+            if (typeof container.requestFullscreen !== "undefined") container.requestFullscreen();
+        });
+
         container.append(this.controls.element());
         attachVideo.replaceWith(container);
     }
@@ -72,7 +81,7 @@ export class Player {
         this.controls.Timeline.Duration = this.video.duration;
         this.controls.Timeline.CurrentSecond = this.video.currentTime;
         this.controls.PauseButton.IsPlay = !this.video.paused;
-        this.controls.Time.DurationSeconds = this.video.duration;
+        this.controls.TimeLabel.DurationSeconds = this.video.duration;
         this.controls.VolumeController.Volume = this.video.volume * 100;
 
         this.video.addEventListener ("timeupdate", this.updateTime.bind(this));
@@ -82,7 +91,7 @@ export class Player {
 
     private updateTime (event: Event): void{
         this.controls.Timeline.CurrentSecond = this.video.currentTime;
-        this.controls.Time.CurrentSeconds = this.video.currentTime;
+        this.controls.TimeLabel.CurrentSeconds = this.video.currentTime;
     }
 
     private updateBuffered (): void{
