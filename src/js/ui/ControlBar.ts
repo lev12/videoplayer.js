@@ -1,6 +1,6 @@
 import { Component } from "../type/Component";
 import { PauseButton } from "./PauseButton";
-import { Time } from "./Time";
+import { TimeLabel } from "./TimeLabel";
 import { Timeline } from "./Timeline";
 import { VolumeController } from "./VolumeController";
 
@@ -11,7 +11,7 @@ export class ControlBar implements Component {
     private containerBottom: HTMLDivElement;
     private pauseButton: PauseButton;
     private volumeController: VolumeController;
-    private time: Time;
+    private time: TimeLabel;
 
     constructor () {
         this.container = this.createContainer();
@@ -41,7 +41,7 @@ export class ControlBar implements Component {
         return this.volumeController;
     }
 
-    public get Time(): Time {
+    public get Time(): TimeLabel {
         return this.time;
     }
 
@@ -51,7 +51,7 @@ export class ControlBar implements Component {
         return container;
     }
 
-    private createContainerBottom (pButton: PauseButton, vController: VolumeController, t: Time): HTMLDivElement {
+    private createContainerBottom (pButton: PauseButton, vController: VolumeController, t: TimeLabel): HTMLDivElement {
         let container: HTMLDivElement = document.createElement('div');
         container.classList.add("vp-control-bottom-container");
         
@@ -76,8 +76,8 @@ export class ControlBar implements Component {
         return vol;
     }
 
-    private createTime (): Time {
-        let time: Time = new Time();
+    private createTime (): TimeLabel {
+        let time: TimeLabel = new TimeLabel();
         return time;
     }
 }

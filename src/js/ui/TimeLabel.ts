@@ -1,6 +1,6 @@
 import { Component } from "../type/Component";
 
-export class Time implements Component {
+export class TimeLabel implements Component {
     private container: HTMLDivElement;
     private remainingTimeElement: HTMLSpanElement;
     private durationTimeElement: HTMLSpanElement;
