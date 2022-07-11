@@ -1,5 +1,6 @@
 import { ButtonEvent } from "./Button";
 import { ControlBar } from "./ControlBar";
+import { FullscreenButtonEvent } from "./FullscreenButton";
 import { Timeline, TimelineEvent } from "./Timeline";
 import { VolumeControllerEvent } from "./VolumeController";
 
@@ -39,8 +40,11 @@ export class Player {
             this.video.requestPictureInPicture();
         });
 
-        this.controls.FullscreenButton.on("click", () => {
-            if (typeof container.requestFullscreen !== "undefined") container.requestFullscreen();
+        this.controls.FullscreenButton.on("click", (e: FullscreenButtonEvent) => {
+            if (e.IsFullscreen) {
+                if (typeof container.requestFullscreen !== "undefined") container.requestFullscreen();
+            }
+            else document.exitFullscreen();
         });
 
         container.append(this.controls.element());
