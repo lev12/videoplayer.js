@@ -169,15 +169,14 @@ $control-quality-width: 250px;
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.3) 41.15%);
 
-
-        height: $control-bottom-height;
+        padding-top: 1%;
+        padding-bottom: 5px;
     }
 
     .vp-timeline{
-        margin-top: 1%;
         margin-left: 1%;
         margin-right: 1%;
-        height: 5px;
+        height: 0.3em;
         position: relative;
         background-color: #757575;
 
@@ -238,8 +237,7 @@ $control-quality-width: 250px;
     }
 
     .vp-control-bottom-container{
-        margin-top: auto;
-        margin-bottom: auto;
+        margin-top: 5px;
         margin-left: 1.5%;
         margin-right: 1.5%;
 
@@ -369,7 +367,7 @@ $control-quality-width: 250px;
         position: absolute;
         right: 1%;
         bottom: $control-bottom-height;
-        height: $control-settings-height;
+        //height: $control-settings-height;
         width: $control-settings-width;
         border-radius: 5px;
         padding: 5px;
