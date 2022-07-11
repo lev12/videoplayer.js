@@ -18,11 +18,11 @@ export class Button extends EventEmitter implements Component {
     private text: string | undefined;
     private icon: Icon | undefined;
 
-    constructor (){
+    constructor (isEmitEvent: boolean = true){
         super();
         this.type = ButtonType.empty;
         this.buttonElement = this.createButtonElement();
-        this.buttonElement.addEventListener("click",(e: Event) => {
+        if (isEmitEvent) this.buttonElement.addEventListener("click",(e: Event) => {
             this.emit("click", new ButtonEvent("click"));
         });
     }
@@ -46,7 +46,7 @@ export class Button extends EventEmitter implements Component {
 
     public set Text(value: string) {
         this.text = value;
-        this.textElement = this.createTextElement();
+        this.textElement = this.createTextElement(value);
         this.buttonElement.append(this.textElement);
         if (typeof this.iconElement === "undefined") {
             this.type = ButtonType.text;
@@ -68,7 +68,7 @@ export class Button extends EventEmitter implements Component {
         this.icon = value;
         this.iconElement = this.icon.element();
         for (let i = 0; i < this.buttonElement.children.length; i++) {
-            for (let j = 0; i < this.buttonElement.children[i].classList.length; j++) {
+            for (let j = 0; j < this.buttonElement.children[i].classList.length; j++) {
                 if (this.buttonElement.children[i].classList[j] === "vp-icon-placeholder") {
                     this.buttonElement.children[i].remove();
                     break;
@@ -93,14 +93,15 @@ export class Button extends EventEmitter implements Component {
         return buttonElement;
     }
 
-    private createTextElement(): HTMLSpanElement{
-        let textElement = new HTMLSpanElement();
+    private createTextElement(text: string): HTMLSpanElement{
+        let textElement = document.createElement('span');
         textElement.classList.add("vp-button-text");
+        textElement.innerText = text;
         return textElement;
     }
 
     private createIconElement(iconCssStyle: string): HTMLSpanElement{
-        let textElement = new HTMLSpanElement();
+        let textElement = document.createElement('span');
         textElement.classList.add("vp-button-icon");
         textElement.classList.add(iconCssStyle);
         return textElement;

@@ -1,19 +1,28 @@
 import { Component } from "../../type/Component";
-import { Button } from "../Button";
+import { Button, ButtonEvent } from "../Button";
 import { Icon, IconType } from "../Icon";
 
 export class SettingsButton extends Button implements Component{
-    constructor () {
-        super();
+    private isViewSettingsControl: boolean;
+    constructor (isViewSettingsControl: boolean = false) {
+        super(false);
+        this.isViewSettingsControl = isViewSettingsControl
         this.Icon = new Icon(IconType.settings);
         this.buttonElement.addEventListener("click",(e: Event) => {
-            this.emit("click", new SettingsButtonEvent("click"));
+            this.isViewSettingsControl = !this.isViewSettingsControl;
+            this.emit("click", new SettingsButtonEvent(this.isViewSettingsControl, "click"));
         });
     }
 }
 
-export class SettingsButtonEvent extends Event {
-    constructor(name:string){
+export class SettingsButtonEvent extends ButtonEvent {
+    private isView: boolean
+    constructor(isView:boolean ,name:string){
         super(name);
+        this.isView = isView;
+    }
+
+    public get IsView (): boolean {
+        return this.isView;
     }
 }

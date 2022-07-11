@@ -2,7 +2,8 @@ import { Component } from "../type/Component";
 import { FullscreenButton } from "./FullscreenButton";
 import { PauseButton } from "./PauseButton";
 import { PictureInPictureButton } from "./PictureInPictureButton";
-import { SettingsButton } from "./settings/SettingsButton";
+import { SettingsButton, SettingsButtonEvent } from "./settings/SettingsButton";
+import { SettingsControl } from "./settings/SettingsControl";
 import { TimeLabel } from "./TimeLabel";
 import { Timeline } from "./Timeline";
 import { VolumeController } from "./VolumeController";
@@ -19,6 +20,8 @@ export class ControlBar implements Component {
     private pictureInPictureButton: PictureInPictureButton;
     private fullscreenButtonButton: FullscreenButton;
 
+    private settingsControl: SettingsControl | undefined;
+
     constructor () {
         this.container = this.createContainer();
         this.timeline = this.createTimeline();
@@ -33,6 +36,18 @@ export class ControlBar implements Component {
 
         this.container.append (this.timeline.element());
         this.container.append (this.containerBottom);
+
+        this.settingsButton.on("click", (e: SettingsButtonEvent) => {
+            if (typeof this.settingsControl === "undefined") this.settingsControl = this.createSettingsControl();
+            if (e.IsView){
+                if ((this.containerBottom.previousSibling !== null) && (typeof this.settingsControl !== "undefined"))
+                {
+                    this.container.insertBefore (this.settingsControl.element(), this.containerBottom.previousSibling);
+                }
+                else if (typeof this.settingsControl !== "undefined") this.container.append(this.settingsControl.element());
+            } 
+            else if (typeof this.settingsControl !== "undefined") this.container.removeChild(this.settingsControl.element());
+        });
     }
 
     element (){
@@ -125,5 +140,10 @@ export class ControlBar implements Component {
     private createFullscreenButton (): FullscreenButton {
         let fullscreenButton: FullscreenButton = new FullscreenButton();
         return fullscreenButton;
+    }
+
+    private createSettingsControl(): SettingsControl {
+        let settingsControl: SettingsControl = new SettingsControl();
+        return settingsControl;
     }
 }
