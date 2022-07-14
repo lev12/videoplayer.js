@@ -2,7 +2,7 @@ import { Component } from "../../type/Component";
 import { IconType } from "../Icon";
 import { SettingsControlButton } from "./SettingsControlButton";
 import { SettingsMenu } from "./SettingsMenu";
-import { SettingsSpeed } from "./SettingsSpeed";
+import { SettingsSpeed, SettingsSpeedEvent } from "./SettingsSpeed";
 
 export class SettingsControl extends SettingsMenu {
     private activeMenu: SettingsMenu;
@@ -54,13 +54,20 @@ export class SettingsControl extends SettingsMenu {
             this.speedButton = SettingsControlButton.getSpeedButton();
             this.addElementInMenu(this.speedButton);
             this.speedMenu = new SettingsSpeed();
+            this.speedMenu.on("click", (e: SettingsSpeedEvent) => {
+                if ((typeof this.speedMenu !== "undefined") && (typeof this.speedButton !== "undefined")) {
+                    this.speedButton.Text = SettingsControlButton.getTextSpeedButton(e.speed);
+                    this.emit("change", new SettingsControlEvent(this.activeMenu, e.speed));
+                }
+
+            });
             this.speedButton.on("click", () => {
                 if (typeof this.speedMenu !== "undefined")
                 this.viewOtherMenu(this.speedMenu);
-            })
+            });
             this.speedMenu.BackButton.on("click", () => {
                 this.hideMenu();
-            })
+            });
         }
     }
 
@@ -75,26 +82,40 @@ export class SettingsControl extends SettingsMenu {
         this.container.parentNode?.append(menu.element());
         this.container.parentNode?.removeChild(this.activeMenu.element());
         this.activeMenu = menu;
-        this.emit("view", new SettingsControlEvent("view", this.activeMenu));
+        if (typeof this.speedMenu !== "undefined")
+            this.emit("change", new SettingsControlEvent(this.activeMenu, this.speedMenu.Speed));
     }
 
     private hideMenu () {
         this.activeMenu.element().parentNode?.append(this.element());
         this.activeMenu.element().parentNode?.removeChild(this.activeMenu.element());
         this.activeMenu = this;
-        this.emit("view", new SettingsControlEvent("view", this.activeMenu));
+        if (typeof this.speedMenu !== "undefined")
+            this.emit("change", new SettingsControlEvent(this.activeMenu, this.speedMenu.Speed));
     }
 }
 
 export class SettingsControlEvent extends Event{
     private _settingsMenuActive: SettingsMenu;
+    private _quality: string;
+    private _speed: number;
 
-    constructor (name:string, activeMenu:SettingsMenu){
-        super(name);
+    constructor (activeMenu:SettingsMenu, speed:number, quality: string = ""){
+        super("change");
         this._settingsMenuActive = activeMenu;
+        this._speed = speed;
+        this._quality = quality;
     }
 
     public get SettingsMenuActive(): SettingsMenu {
         return this._settingsMenuActive;
+    }
+
+    public get speed(): number {
+        return this._speed;
+    }
+
+    public get quality(): string {
+        return this._quality;
     }
 }

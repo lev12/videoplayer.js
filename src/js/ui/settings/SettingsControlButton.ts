@@ -31,6 +31,11 @@ export class SettingsControlButton extends Button implements Component {
         return new SettingsControlButton("Нормальная", IconType.speed);
     }
 
+    public static getTextSpeedButton (value: number): string {
+        if (value != 1) return value.toString();
+        return "Нормальная";
+    }
+
     public static getQualityButton (name: string = "автонастройка"): SettingsControlButton {
         return new SettingsControlButton(name, IconType.quality);
     }

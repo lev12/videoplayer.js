@@ -1,6 +1,7 @@
 import { ButtonEvent } from "./Button";
 import { ControlBar } from "./ControlBar";
 import { FullscreenButtonEvent } from "./FullscreenButton";
+import { SettingsControlEvent } from "./settings/SettingsControl";
 import { Timeline, TimelineEvent } from "./Timeline";
 import { VolumeControllerEvent } from "./VolumeController";
 
@@ -45,6 +46,11 @@ export class Player {
                 if (typeof container.requestFullscreen !== "undefined") container.requestFullscreen();
             }
             else document.exitFullscreen();
+        });
+
+        this.controls.SettingsControl.on("change", (e: SettingsControlEvent) => {
+            console.log(e.speed);
+            this.video.playbackRate = e.speed;
         });
 
         container.append(this.controls.element());

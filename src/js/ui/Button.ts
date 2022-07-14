@@ -77,7 +77,18 @@ export class Button extends EventEmitter implements Component {
     public set Text(value: string) {
         this.text = value;
         this.textElement = this.createTextElement(value);
-        this.buttonElement.append(this.textElement);
+        for (let i = 0; i < this.buttonElement.children.length; i++) {
+            for (let j = 0; j < this.buttonElement.children[i].classList.length; j++) {
+                if (this.buttonElement.children[i].classList[j] === "vp-button-text") {
+                    this.buttonElement.children[i].remove();
+                    break;
+                }
+            }
+        }
+        if (typeof this.iconElement !== "undefined") {
+            this.buttonElement.insertBefore(this.textElement,this.iconElement);
+        }
+        else this.buttonElement.append(this.textElement);
         if (typeof this.iconElement === "undefined") {
             this.type = ButtonType.text;
         } else {
@@ -128,6 +139,18 @@ export class Button extends EventEmitter implements Component {
     
     public addClass (className: string){
         this.buttonElement.classList.add(className);
+    }
+
+    public removeIcon (){
+        this.icon = undefined;
+        for (let i = 0; i < this.buttonElement.children.length; i++) {
+            for (let j = 0; j < this.buttonElement.children[i].classList.length; j++) {
+                if (this.buttonElement.children[i].classList[j] === "vp-icon-placeholder") {
+                    this.buttonElement.children[i].remove();
+                    break;
+                }
+            }
+        }
     }
 
     private createButtonElement(): HTMLButtonElement{

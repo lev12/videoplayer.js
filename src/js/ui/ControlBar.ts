@@ -85,6 +85,11 @@ export class ControlBar implements Component {
         return this.settingsButton;
     }
 
+    public get SettingsControl(): SettingsControl {
+        if (typeof this.settingsControl === "undefined") this.settingsControl = this.createSettingsControl();
+        return this.settingsControl;
+    }
+
     public get PictureInPictureButton(): PictureInPictureButton {
         return this.pictureInPictureButton;
     }
