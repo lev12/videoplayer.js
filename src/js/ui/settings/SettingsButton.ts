@@ -10,7 +10,7 @@ export class SettingsButton extends Button implements Component{
         this.Icon = new Icon(IconType.settings);
         this.buttonElement.addEventListener("click",(e: Event) => {
             this.isViewSettingsControl = !this.isViewSettingsControl;
-            this.emit("click", new SettingsButtonEvent(this.isViewSettingsControl, "click"));
+            if (this.isEnable()) this.emit("click", new SettingsButtonEvent(this.isViewSettingsControl, "click"));
         });
     }
 }

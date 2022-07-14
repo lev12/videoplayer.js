@@ -75,11 +75,26 @@ export class SettingsControl extends SettingsMenu {
         this.container.parentNode?.append(menu.element());
         this.container.parentNode?.removeChild(this.activeMenu.element());
         this.activeMenu = menu;
+        this.emit("view", new SettingsControlEvent("view", this.activeMenu));
     }
 
     private hideMenu () {
         this.activeMenu.element().parentNode?.append(this.element());
         this.activeMenu.element().parentNode?.removeChild(this.activeMenu.element());
         this.activeMenu = this;
+        this.emit("view", new SettingsControlEvent("view", this.activeMenu));
+    }
+}
+
+export class SettingsControlEvent extends Event{
+    private _settingsMenuActive: SettingsMenu;
+
+    constructor (name:string, activeMenu:SettingsMenu){
+        super(name);
+        this._settingsMenuActive = activeMenu;
+    }
+
+    public get SettingsMenuActive(): SettingsMenu {
+        return this._settingsMenuActive;
     }
 }

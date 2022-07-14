@@ -3,7 +3,7 @@ import { FullscreenButton } from "./FullscreenButton";
 import { PauseButton } from "./PauseButton";
 import { PictureInPictureButton } from "./PictureInPictureButton";
 import { SettingsButton, SettingsButtonEvent } from "./settings/SettingsButton";
-import { SettingsControl } from "./settings/SettingsControl";
+import { SettingsControl, SettingsControlEvent } from "./settings/SettingsControl";
 import { TimeLabel } from "./TimeLabel";
 import { Timeline } from "./Timeline";
 import { VolumeController } from "./VolumeController";
@@ -47,7 +47,18 @@ export class ControlBar implements Component {
                 else if (typeof this.settingsControl !== "undefined") this.container.append(this.settingsControl.element());
             } 
             else if (typeof this.settingsControl !== "undefined") this.container.removeChild(this.settingsControl.element());
+
+            if (this.settingsControl !== undefined) this.settingsControl.on("view", (e: SettingsControlEvent) => {
+                if (e.SettingsMenuActive instanceof SettingsControl) {
+                    this.settingsButton.enable();
+                }
+                else {
+                    this.settingsButton.disable();
+                }
+            })
         });
+
+
     }
 
     element (){

@@ -9,26 +9,56 @@ export enum ButtonType {
     iconText
 }
 
+export enum ButtonState {
+    enabled,
+    disabled,
+    hover,
+    focused,
+    pressed
+}
+
 export class Button extends EventEmitter implements Component {
     protected buttonElement: HTMLButtonElement;
     protected textElement: HTMLSpanElement | undefined;
     protected iconElement: HTMLSpanElement | undefined;
 
     private type: ButtonType;
+    private state: ButtonState;
     private text: string | undefined;
     private icon: Icon | undefined;
+    //private iconDisabled: Icon | undefined;
 
     constructor (isEmitEvent: boolean = true){
         super();
+        this.state = ButtonState.enabled;
         this.type = ButtonType.empty;
         this.buttonElement = this.createButtonElement();
         if (isEmitEvent) this.buttonElement.addEventListener("click",(e: Event) => {
-            this.emit("click", new ButtonEvent("click"));
+            if (this.state !== ButtonState.disabled) {
+                this.emit("click", new ButtonEvent("click"));
+            }
         });
     }
 
     public element(): HTMLElement {
         return this.buttonElement;
+    }
+
+    public get State(): ButtonState {
+        return this.state;
+    }
+
+    public disable(): void {
+        this.state = ButtonState.disabled;
+    }
+
+    public enable(): void {
+        this.state = ButtonState.enabled;
+    }
+
+    public isEnable(): boolean {
+        if (this.state === ButtonState.disabled) return false;
+        else return true;
     }
 
     public get Type(): ButtonType {
@@ -82,6 +112,19 @@ export class Button extends EventEmitter implements Component {
             this.type = ButtonType.iconText;
         }
     }
+
+    /*public get IconDisabled(): Icon {
+        if (typeof this.iconDisabled !== "undefined") {
+            return this.iconDisabled;
+        }
+        else {
+            return new Icon();
+        }
+    }
+
+    public set IconDisabled(value: Icon) {
+        this.iconDisabled = value;
+    }*/
     
     public addClass (className: string){
         this.buttonElement.classList.add(className);
