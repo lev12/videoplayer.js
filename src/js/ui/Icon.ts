@@ -16,6 +16,7 @@ export enum IconType {
     subtitles,
     speed,
     quality,
+    version,
     back,
     check,
     close
@@ -49,6 +50,7 @@ export class Icon implements Component {
             case IconType.subtitles:  className = "vp-icon-subtitles"; break;
             case IconType.speed:  className = "vp-icon-speed"; break;
             case IconType.quality:  className = "vp-icon-quality"; break;
+            case IconType.version:  className = "vp-icon-version"; break;
             case IconType.back:  className = "vp-icon-back"; break;
             case IconType.check:  className = "vp-icon-check"; break;
             case IconType.close:  className = "vp-icon-close"; break;

@@ -98,6 +98,21 @@ export class ControlBar implements Component {
         return this.fullscreenButtonButton;
     }
 
+    public set Groups(value: Array<string>) {
+        if (typeof this.settingsControl === "undefined") this.settingsControl = this.createSettingsControl();
+        this.settingsControl.addVersion(value);
+    }
+
+    public set VideoTracks(value: Array<Array<string>>) {
+        if (typeof this.settingsControl === "undefined") this.settingsControl = this.createSettingsControl();
+        this.settingsControl.addVideoTrack(value);
+    }
+
+    public set Quality(value: Array<Array<Array<string>>>) {
+        if (typeof this.settingsControl === "undefined") this.settingsControl = this.createSettingsControl();
+        this.settingsControl.addQuality(value);
+    }
+
     private createContainer (): HTMLDivElement {
         let container: HTMLDivElement = document.createElement('div');
         container.classList.add("vp-controls");

@@ -52,7 +52,6 @@ export class SettingsSpeed extends SettingsMenu {
 
     private createBackButton (): SettingsControlButton {
         let button = SettingsControlButton.getBackButton();
-
         return button;
     }
     

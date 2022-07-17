@@ -53,4 +53,13 @@ export class SettingsMenu extends EventEmitter implements Component {
         }
 
     } 
+
+    protected clearContainer () {
+        let list = this.container.children[0];
+        let elements = list.children;
+        let l = elements.length;
+        for (let i = 0; i < l; i++) {
+            list.removeChild(elements[0]);
+        }
+    }
 }

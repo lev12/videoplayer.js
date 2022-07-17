@@ -15,6 +15,10 @@ export class SettingsControlButton extends Button implements Component {
         });
     }
 
+    public static getVersionButton (): SettingsControlButton {
+        return new SettingsControlButton("Основная", IconType.version);
+    }
+
     public static getAudioTrackButton (): SettingsControlButton {
         return new SettingsControlButton("Основная", IconType.audioTrack);
     }
@@ -47,6 +51,10 @@ export class SettingsControlButton extends Button implements Component {
     public static getSpeedSelect (speed: number): SettingsControlButton {
         if (speed === 1) return new SettingsControlButton("Нормальная");
         else return new SettingsControlButton(speed+"");
+    }
+
+    public static getSelect (text: string): SettingsControlButton {
+        return new SettingsControlButton(text);
     }
 }
 

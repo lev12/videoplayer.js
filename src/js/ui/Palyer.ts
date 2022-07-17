@@ -4,12 +4,22 @@ import { FullscreenButtonEvent } from "./FullscreenButton";
 import { SettingsControlEvent } from "./settings/SettingsControl";
 import { Timeline, TimelineEvent } from "./Timeline";
 import { VolumeControllerEvent } from "./VolumeController";
+import { EventEmitter } from 'events';
 
-export class Player {
+export class Player extends EventEmitter {
     private video: HTMLVideoElement;
     private controls: ControlBar;
 
+    private groupList: Array<string>;
+    private videoTrackList: Array<Array<string>>;
+    private qualityList: Array<Array<Array<string>>>;
+
     constructor (attachVideo: HTMLVideoElement){
+        super();
+        this.groupList = new Array<string>;
+        this.videoTrackList = new Array<Array<string>>;
+        this.qualityList = new Array<Array<Array<string>>>;
+
         let container: HTMLDivElement = this.createContainer();
 
         this.video = this.createVideo();
@@ -49,8 +59,11 @@ export class Player {
         });
 
         this.controls.SettingsControl.on("change", (e: SettingsControlEvent) => {
-            console.log(e.speed);
-            this.video.playbackRate = e.speed;
+            this.video.playbackRate = e.Speed;
+        });
+
+        this.controls.SettingsControl.on("changeSource", (e: SettingsControlEvent) => {
+            this.emit("changeSource", new PlayerSourceEvent(e.Version, e.VideoTrack, e.Quality));
         });
 
         container.append(this.controls.element());
@@ -67,6 +80,28 @@ export class Player {
 
     set Poster (poster: string){
         this.video.poster = poster;
+    }
+
+    public addGroups (list: Array<string>) {
+        for (let i = 0; i < list.length; i++) {
+            const element = list[i];
+            this.groupList.push(element);
+        }
+        this.controls.Groups = this.groupList;
+    }
+
+    public addVideoTracks (group: string, list: Array<string>) {
+        for (let i = 0; i < list.length; i++) {
+            this.videoTrackList.push([group, list[i]]);
+        }
+        this.controls.VideoTracks = this.videoTrackList;
+    }
+
+    public addQuality (group: string, videoTrack: string, list: Array<string>) {
+        for (let i = 0; i < list.length; i++) {
+            this.qualityList.push([[group,videoTrack,list[i]]]);
+        }
+        this.controls.Quality = this.qualityList;
     }
 
     private createContainer(): HTMLDivElement {
@@ -106,5 +141,32 @@ export class Player {
 
     private updateBuffered (): void{
         this.controls.Timeline.CurrentBuffered = this.video.buffered;
+    }
+}
+
+export class PlayerSourceEvent extends Event {
+    private _group: string;
+
+    private _videoTrack: string;
+
+    private _quality: string;
+
+    constructor(group: string, videoTrack: string, quality: string) {
+        super("changeSource");
+        this._group = group;
+        this._videoTrack = videoTrack;
+        this._quality = quality;
+    }
+
+    public get group(): string {
+        return this._group;
+    }
+
+    public get videoTrack(): string {
+        return this._videoTrack;
+    }
+
+    public get quality(): string {
+        return this._quality;
     }
 }
