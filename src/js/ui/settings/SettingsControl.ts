@@ -15,11 +15,10 @@ export class SettingsControl extends SettingsMenu {
     private speedButton: SettingsControlButton | undefined;
     private qualityButton: SettingsControlButton | undefined;
 
-    //private audioTrackMenu: Settings
     private versionMenu: SettingsList | undefined;
-    private audioTrackMenu: SettingsList | undefined;
+    //private audioTrackMenu: SettingsList | undefined;
     private videoTrackMenu: SettingsList | undefined;
-    private subtitlesMenu: SettingsList | undefined;
+    //private subtitlesMenu: SettingsList | undefined;
     private speedMenu: SettingsSpeed | undefined;
     private qualityMenu: SettingsList | undefined;
 
@@ -36,8 +35,8 @@ export class SettingsControl extends SettingsMenu {
         this.videoTrackList = new Array<Array<string>>;
         this.qualityList = new Array<Array<Array<string>>>;
 
-        this.addAudioTrack(this.videoTrackList);
-        this.addSubtitles(this.videoTrackList);
+        //this.addAudioTrack(this.videoTrackList);
+        //this.addSubtitles(this.videoTrackList);
         this.addSpeed();
     }
 
@@ -70,13 +69,13 @@ export class SettingsControl extends SettingsMenu {
         }
     }
 
-    public addAudioTrack (value: Array<Array<string>>) {
+    /*public addAudioTrack (value: Array<Array<string>>) {
         
         if (typeof this.audioTrackButton === "undefined") {
             this.audioTrackButton = SettingsControlButton.getAudioTrackButton();
             this.addElementInMenu(this.audioTrackButton);
         }
-    }
+    }*/
 
     public addVideoTrack (value: Array<Array<string>>) {
         this.videoTrackList = value;
@@ -111,12 +110,12 @@ export class SettingsControl extends SettingsMenu {
         }
     }
 
-    public addSubtitles (value: Array<Array<string>>) {
+    /*public addSubtitles (value: Array<Array<string>>) {
         if (typeof this.subtitlesButton === "undefined") {
             this.subtitlesButton = SettingsControlButton.getSubtitlesButton();
             this.addElementInMenu(this.subtitlesButton);
         }
-    }
+    }*/
 
     public addSpeed () {
         if (typeof this.speedButton === "undefined") {

@@ -75,7 +75,11 @@ export class Player extends EventEmitter {
     }
 
     set Src (value: string) {
+        let currentTimePresent = (this.video.currentTime / this.video.duration) * 100;
         this.video.src = value;
+        this.video.addEventListener ("loadedmetadata", () => {
+            this.video.currentTime = currentTimePresent / 100 * this.video.duration;
+        });
     }
 
     set Poster (poster: string){
