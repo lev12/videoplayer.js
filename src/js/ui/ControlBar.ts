@@ -65,6 +65,19 @@ export class ControlBar implements Component {
         return this.container;
     }
 
+    public hide() {
+        this.container.style.display = "none";
+    }
+
+    public view() {
+        this.container.style.display = "block";
+    }
+
+    public get isView(): boolean {
+        if (this.container.style.display === "none") return false;
+        else return true;
+    }
+
     public get Timeline(): Timeline{
         return this.timeline;
     }

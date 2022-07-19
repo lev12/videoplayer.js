@@ -27,6 +27,48 @@ export class Player extends EventEmitter {
         container.append(this.video);
 
         this.controls = this.createControls();
+        this.video.addEventListener("play", () => {
+            let timer = setTimeout(() => {
+                this.controls.hide();
+                container.style.cursor = "none";
+            }, 3000);
+            this.video.addEventListener("pause", () => {
+                clearInterval(timer);
+            });
+        })
+        this.video.addEventListener("pause", () => {
+            this.controls.view();
+            container.style.cursor = "";
+        })
+        this.video.addEventListener("ended", () => {
+            this.controls.view();
+            container.style.cursor = "";
+        })
+        container.addEventListener("mouseenter", () => {
+            this.controls.view();
+            container.style.cursor = "";
+        })
+        container.addEventListener("mouseleave", () => {
+            setTimeout(() => {
+                this.controls.hide();
+                container.style.cursor = "none";
+            }, 3000);
+        })
+        container.addEventListener("mousemove", () => {
+            let timer: NodeJS.Timeout;
+            if (this.video.paused === false) timer = setTimeout(() => {
+                this.controls.hide();
+                container.style.cursor = "none";
+            }, 3000);
+            this.video.addEventListener("pause", () => {
+                clearInterval(timer);
+            });
+            if (this.controls.isView === false) {
+                this.controls.view();
+                container.style.cursor = "";
+            }
+        })
+
         this.controls.Timeline.on("change", (e: TimelineEvent) => {
             this.VideoElement.currentTime = e.TimeSeconds;
             this.updateTime(e);
@@ -76,6 +118,7 @@ export class Player extends EventEmitter {
 
     set Src (value: string) {
         let currentTimePresent = (this.video.currentTime / this.video.duration) * 100;
+        if (currentTimePresent.toString() === "NaN") currentTimePresent = 0;
         this.video.src = value;
         this.video.addEventListener ("loadedmetadata", () => {
             this.video.currentTime = currentTimePresent / 100 * this.video.duration;
