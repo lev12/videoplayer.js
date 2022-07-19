@@ -49,10 +49,15 @@ export class Player extends EventEmitter {
             container.style.cursor = "";
         })
         container.addEventListener("mouseleave", () => {
-            setTimeout(() => {
+            let timer: NodeJS.Timeout;
+            if (this.video.paused === false)
+            timer = setTimeout(() => {
                 this.controls.hide();
                 container.style.cursor = "none";
             }, 3000);
+            this.video.addEventListener("pause", () => {
+                clearInterval(timer);
+            });
         })
         container.addEventListener("mousemove", () => {
             let timer: NodeJS.Timeout;
