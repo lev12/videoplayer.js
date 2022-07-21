@@ -1,0 +1,5 @@
+root = true
+[*.txt]
+indent_style = space
+indent_size = 3
+trim_trailing_whitespace = true
