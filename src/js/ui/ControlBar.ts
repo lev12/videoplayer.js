@@ -103,6 +103,20 @@ export class ControlBar implements Component {
         return this.settingsControl;
     }
 
+    public get isViewSettingsControl(): boolean {
+        return this.settingsButton.IsViewSettingsControl;
+    }
+
+    public hideSettingsControl() {
+        this.settingsControl?.hideMenu();
+        //this.settingsButton.enable();
+        if (this.settingsButton.IsViewSettingsControl === true) this.settingsButton.click();
+    }
+
+    public viewSettingsControl() {
+        if (this.settingsButton.IsViewSettingsControl === false) this.settingsButton.click();
+    }
+
     public get PictureInPictureButton(): PictureInPictureButton {
         return this.pictureInPictureButton;
     }

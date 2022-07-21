@@ -38,6 +38,10 @@ export class SettingsControl extends SettingsMenu {
         //this.addAudioTrack(this.videoTrackList);
         //this.addSubtitles(this.videoTrackList);
         this.addSpeed();
+
+        this.container.addEventListener("mousedown", ()=> {
+            console.log("mousedown");
+        })
     }
 
     public addVersion (value: Array<string>) {

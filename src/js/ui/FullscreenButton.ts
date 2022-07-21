@@ -13,6 +13,10 @@ export class FullscreenButton extends Button implements Component{
             this.emit("click", new FullscreenButtonEvent(this.isFullscreen,"click"));
         });
     }
+
+    public get IsFullscreen(): boolean {
+        return this.isFullscreen;
+    }
 }
 
 export class FullscreenButtonEvent extends Event {

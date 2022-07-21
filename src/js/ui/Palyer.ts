@@ -74,10 +74,12 @@ export class Player extends EventEmitter {
             }
         })
 
+
         this.controls.Timeline.on("change", (e: TimelineEvent) => {
             this.VideoElement.currentTime = e.TimeSeconds;
             this.updateTime(e);
         });
+
         this.controls.PauseButton.IsPlay = this.video.paused;
         this.controls.PauseButton.on("click", (e: ButtonEvent) => {
             if (this.controls.PauseButton.IsPlay){
@@ -86,6 +88,25 @@ export class Player extends EventEmitter {
                 this.video.play();
             }
         });
+        container.addEventListener("click", (e: MouseEvent) => {
+            let timer = setTimeout (() => {
+                if (e.target === this.video) {
+                    if (this.controls.isViewSettingsControl) this.controls.hideSettingsControl();
+                    else if (this.video.paused === true){
+                        this.video.play();
+                        this.controls.PauseButton.IsPlay = true;
+                    }  
+                    else {
+                        this.video.pause();
+                        this.controls.PauseButton.IsPlay = false;
+                    }
+                }
+            }, 200);
+            container.addEventListener("dblclick", (e: MouseEvent) => {
+                clearTimeout(timer);
+            });
+        });
+
 
         
         this.controls.VolumeController.on("change", (e: VolumeControllerEvent) => {
@@ -104,6 +125,11 @@ export class Player extends EventEmitter {
             }
             else document.exitFullscreen();
         });
+
+        container.addEventListener("dblclick", (e: MouseEvent) => {
+            if (e.detail === 2) this.controls.FullscreenButton.click();
+        })
+
 
         this.controls.SettingsControl.on("change", (e: SettingsControlEvent) => {
             this.video.playbackRate = e.Speed;

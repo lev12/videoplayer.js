@@ -13,6 +13,10 @@ export class SettingsButton extends Button implements Component{
             if (this.isEnable()) this.emit("click", new SettingsButtonEvent(this.isViewSettingsControl, "click"));
         });
     }
+
+    public get IsViewSettingsControl(): boolean {
+        return this.isViewSettingsControl;
+    }
 }
 
 export class SettingsButtonEvent extends ButtonEvent {

@@ -35,7 +35,7 @@ export class Button extends EventEmitter implements Component {
         this.buttonElement = this.createButtonElement();
         if (isEmitEvent) this.buttonElement.addEventListener("click",(e: Event) => {
             if (this.state !== ButtonState.disabled) {
-                this.emit("click", new ButtonEvent("click"));
+                this.emit("click", new ButtonEvent());
             }
         });
     }
@@ -60,6 +60,10 @@ export class Button extends EventEmitter implements Component {
         if (this.state === ButtonState.disabled) return false;
         else return true;
     }
+
+    public click(): void {
+        this.buttonElement.click();
+    };
 
     public get Type(): ButtonType {
         return this.type;
@@ -175,7 +179,7 @@ export class Button extends EventEmitter implements Component {
 }
 
 export class ButtonEvent extends Event {
-    constructor (name:string){
+    constructor (name: string = "click"){
         super(name);
     }
 }
